@@ -1,31 +1,24 @@
-const API = "https://tuapp-production.up.railway.app/api/gastronomia"; // reemplaza con tu URL real
-
-// Función para editar un registro
-async function editarGastronomia(id, nombre, pais) {
-  try {
-    const response = await fetch(`${API}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, pais }),
-    });
-
-    const data = await response.json();
-    console.log(data);
-
-    if (response.ok) {
-      alert("✅ Registro actualizado correctamente");
-    } else {
-      alert("❌ Error al actualizar: " + (data.error || data.mensaje));
-    }
-  } catch (error) {
-    console.error("Error en editar:", error);
-  }
+function cargar(id, pais, plato) {
+  document.getElementById("id").value = id;
+  document.getElementById("pais").value = pais;
+  document.getElementById("plato").value = plato;
 }
 
-// Ejemplo de uso (puedes cambiarlo según tu interfaz)
-document.getElementById("btnEditar").addEventListener("click", () => {
-  const id = document.getElementById("idEditar").value;
-  const nombre = document.getElementById("nombreEditar").value;
-  const pais = document.getElementById("paisEditar").value;
-  editarGastronomia(id, nombre, pais);
-});
+async function editar() {
+  const id = document.getElementById("id").value;
+  const pais = document.getElementById("pais").value;
+  const plato = document.getElementById("plato").value;
+
+  if (!id) return alert("Selecciona un registro para editar");
+
+  const res = await fetch(`http://localhost:3000/api/gastronomia/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ pais, plato_tipico: plato })
+  });
+
+  const data = await res.json();
+  alert(data.message || data.error);
+  listar();
+  limpiar();
+}

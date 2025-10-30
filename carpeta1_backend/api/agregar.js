@@ -1,18 +1,21 @@
+import express from "express";
 import { conexion } from "../db/conexion.js";
 
-export const agregar = async (req, res) => {
-  try {
-    const { pais, plato_tipico } = req.body;
-    if (!pais || !plato_tipico) {
-      return res.status(400).json({ error: "Faltan datos obligatorios" });
-    }
+const router = express.Router();
 
-    await conexion.query(
-      "INSERT INTO gastronomia (pais, plato_tipico) VALUES (?, ?)",
-      [pais, plato_tipico]
+router.post("/", async (req, res) => {
+  const { nombre, pais } = req.body;
+
+  try {
+    const [resultado] = await conexion.execute(
+      "INSERT INTO gastronomia (nombre, pais) VALUES (?, ?)",
+      [nombre, pais]
     );
-    res.json({ message: "✅ Registro agregado correctamente" });
-  } catch (err) {
-    res.status(500).json({ error: "Error al agregar registro" });
+    res.json({ mensaje: "✅ Registro agregado correctamente", id: resultado.insertId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "❌ Error al agregar el registro" });
   }
-};
+});
+
+export default router;
