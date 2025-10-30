@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cd carpeta1_backend && npm start"
+    "start": "cd carpeta1_backend && npm install --omit=dev && npm start"
   }
 }
