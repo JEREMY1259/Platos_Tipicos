@@ -1,1 +1,3 @@
  
+https://platostipicos-production.up.railway.app/api/gastronomia
+platostipicos-production.up.railway.app
