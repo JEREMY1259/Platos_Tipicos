@@ -1,0 +1,22 @@
+# 🚫 Archivos y carpetas que NO deben subirse a GitHub
+
+# Dependencias de Node
+node_modules/
+
+# Configuración del entorno
+.env
+
+# Archivos temporales y logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Caché
+.cache/
+dist/
+.tmp/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
