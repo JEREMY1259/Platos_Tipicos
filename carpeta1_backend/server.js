@@ -3,10 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { conexion } from "./db/conexion.js";
 
-import listar from "./apis/listar.js";
-import agregar from "./apis/agregar.js";
-import editar from "./apis/editar.js";
-import eliminar from "./apis/eliminar.js";
+// 👇 cambia 'apis' por 'api'
+import listar from "./api/listar.js";
+import agregar from "./api/agregar.js";
+import editar from "./api/editar.js";
+import eliminar from "./api/eliminar.js";
 
 dotenv.config();
 const app = express();
@@ -15,7 +16,6 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-// Rutas CRUD principales
 app.use("/api/gastronomia", listar);
 app.use("/api/gastronomia", agregar);
 app.use("/api/gastronomia", editar);
