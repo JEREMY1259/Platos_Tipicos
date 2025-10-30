@@ -1,0 +1,20 @@
+# 🧭 Configuración de Railway
+# Indica que el backend está en la carpeta "carpeta1_backend"
+# e ignora las demás carpetas (frontend y textos)
+
+[build]
+builder = "NIXPACKS"
+root = "carpeta1_backend"
+
+# Entorno de compilación
+[build.env]
+NODE_ENV = "production"
+
+# Ignorar carpetas que no deben incluirse en el build
+[build.ignore]
+paths = ["carpeta2_enlaces_api", "carpeta3_frontend"]
+
+# Instrucciones de despliegue
+[deploy]
+buildCommand = "npm install"
+startCommand = "npm start"
